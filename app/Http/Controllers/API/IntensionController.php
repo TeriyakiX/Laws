@@ -30,7 +30,7 @@ class IntensionController extends BaseController
     }
 
 
-    public function update($id, IntensionRequest $request): \Illuminate\Http\Response
+    public function update($id, IntensionRequest $request)
     {
         $intension = Intensions::findOrFail($id);
         $data = $request->validated();
@@ -39,7 +39,7 @@ class IntensionController extends BaseController
         return $this->sendResponse(IntensionResource::make($intension), 'Successfully.');
     }
 
-    public function delete($id): \Illuminate\Http\Response
+    public function delete($id)
     {
         $intension = Intensions::findOrFail($id);
         $intension->delete();

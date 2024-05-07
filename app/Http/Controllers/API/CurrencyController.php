@@ -13,13 +13,13 @@ use Illuminate\Http\Request;
 
 class CurrencyController extends BaseController
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request)
     {
         $currency = Currency::all();
         return $this->sendResponse(CurrencyResource::collection($currency), 'Successfully.');
     }
 
-    public function create(CurrencyRequest $request): JsonResponse
+    public function create(CurrencyRequest $request)
     {
         $data = $request->validated();
         $currency = Currency::create($data);
@@ -27,7 +27,7 @@ class CurrencyController extends BaseController
     }
 
 
-    public function update($id, CurrencyRequest $request): JsonResponse
+    public function update($id, CurrencyRequest $request)
     {
         $currency = Currency::findOrFail($id);
         $data = $request->validated();
@@ -35,7 +35,7 @@ class CurrencyController extends BaseController
         return $this->sendResponse(CurrencyResource::make($currency), 'Successfully.');
     }
 
-    public function delete($id): JsonResponse
+    public function delete($id)
     {
         $currency = Currency::findOrFail($id);
         $currency->delete();

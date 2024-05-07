@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ProgramController extends BaseController
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request)
     {
         $programs = Program::all();
         return $this->sendResponse(ProgramResource::collection($programs), 'Successfully.');
     }
 
-    public function create(ProgramRequest $request): JsonResponse
+    public function create(ProgramRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
@@ -28,7 +28,7 @@ class ProgramController extends BaseController
     }
 
 
-    public function update($id, ProgramRequest $request): JsonResponse
+    public function update($id, ProgramRequest $request)
     {
         $program = Program::findOrFail($id);
         $data = $request->validated();
@@ -37,7 +37,7 @@ class ProgramController extends BaseController
         return $this->sendResponse(ProgramResource::make($program), 'Successfully.');
     }
 
-    public function delete($id): JsonResponse
+    public function delete($id)
     {
         $program = Program::findOrFail($id);
         $program->delete();
