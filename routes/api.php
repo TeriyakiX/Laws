@@ -12,6 +12,8 @@ use App\Http\Controllers\API\BankController;
 use App\Http\Controllers\API\GptController;
 use App\Http\Controllers\Auth\GoogleController;
 use \App\Http\Controllers\Auth\AppleController;
+use \App\Http\Controllers\Auth\ForgotPasswordController;
+use \App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Notifications\PushNotification;
 
@@ -21,9 +23,8 @@ Route::prefix('v1')->group(function () {
     Route::controller(RegisterController::class)->group(function(){
         Route::post('register', 'register');
         Route::post('login', 'login');
-        Route::post('forgot-password', 'forgotPassword');
-        Route::post('check-code', 'checkCode');
-        Route::post('change-password', 'changePassword');
+        Route::post('send-reset-password-link', [ResetPasswordController::class, 'sendResetPasswordLink']);
+        Route::post('reset-password/{token}', [ResetPasswordController::class, 'resetPassword']);
 
         Route::middleware('auth:sanctum')->group( function () {
             Route::post('logout', 'logout');
