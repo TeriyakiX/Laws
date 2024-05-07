@@ -35,9 +35,6 @@ class AppleController extends Controller
         try {
             $appleUser = Socialite::driver('apple')->stateless()->user();
         } catch (\Exception $e) {
-            // Логирование ошибки для дальнейшего анализа
-            Log::error('Apple callback error: ' . $e->getMessage());
-            // Возврат ответа с ошибкой
             return response()->json(['error' => 'Apple callback error'], 500);
         }
 
