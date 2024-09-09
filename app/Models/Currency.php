@@ -10,6 +10,7 @@ class Currency extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'country',
         'currency_name',
         'currency_symbol',

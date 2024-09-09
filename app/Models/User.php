@@ -53,4 +53,9 @@ class User extends Authenticatable
 
         return $this->password_reset_token;
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

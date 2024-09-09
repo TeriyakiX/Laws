@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+{{--                    {{ __('You are logged in!') }}--}}
+                        <div>
+                            <a href="{{ route('admin') }}" class="btn btn-primary mb-3">Админ панель</a>
+                        </div>
                 </div>
             </div>
         </div>
