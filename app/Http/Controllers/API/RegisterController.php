@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\CheckCodeRequest;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\SendCodeRequest;
 use App\Http\Resources\ConfectionerResource;
 use App\Http\Resources\ProfileResource;
@@ -32,19 +33,19 @@ class RegisterController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request): JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|different:name,email',
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
+//        $validator = Validator::make($request->all(), [
+//            'name' => 'required|string|max:255',
+//            'email' => 'required|email|max:255|unique:users',
+//            'password' => 'required|min:8|max:255|different:name,email',
+//        ]);
+//
+//        if($validator->fails()){
+//            return $this->sendError('Validation Error.', $validator->errors());
+//        }
+        $request->validated();
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);

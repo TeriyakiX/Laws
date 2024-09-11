@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use \App\Http\Controllers\Auth\AppleController;
 use \App\Http\Controllers\Auth\ForgotPasswordController;
 use \App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\API\CheckListController;
 
 use App\Notifications\PushNotification;
 
@@ -48,6 +49,7 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::middleware('auth:sanctum')->group( function () {
+        Route::middleware('ban')->group( function () {
             // intension crud
             Route::get('intension/index', [IntensionController::class, 'index']);
             Route::post('intension/create', [IntensionController::class, 'create']);
@@ -79,8 +81,13 @@ Route::prefix('v1')->group(function () {
             Route::put('bank/{id}/update', [BankController::class, 'update']);
             Route::delete('bank/{id}/delete', [BankController::class, 'delete']);
 
-            Route::post('chat/gpt', [GptController::class, 'chat']);
+            // check list
+            Route::get('checklist/index', [CheckListController::class, 'index']);
+            Route::post('checklist/create', [CheckListController::class, 'create']);
+            Route::get('checklist/finished/{id}', [CheckListController::class, 'finished']);
 
+            Route::post('chat/gpt', [GptController::class, 'chat']);
+        });
         });
 
 

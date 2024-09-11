@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'last_visited_day',
+        'banned',
     ];
 
 
@@ -57,5 +58,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role === 'admin';
+    }
+
+    public function isBan()
+    {
+        return $this->banned === null;
     }
 }

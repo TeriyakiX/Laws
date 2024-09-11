@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CurrenciesController;
 use App\Http\Controllers\Admin\BeliefsController;
+use App\Http\Controllers\Admin\CheckListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,13 @@ Route::middleware(['admin'])->group(function () {
             Route::get('/create/form', [BeliefsController::class, 'createForm'])->name('admin.bel.create');
             Route::post('/create', [BeliefsController::class, 'create'])->name('bel.create');
             Route::get('/delete', [BeliefsController::class, 'delete'])->name('admin.bel.delete');
+        });
+
+        Route::prefix('checklist')->group(function () {
+            Route::get('/', [CheckListController::class, 'index'])->name('admin.checklist.index');
+            Route::get('/update/form', [CheckListController::class, 'updateForm'])->name('admin.checklist.update');
+            Route::post('/update', [CheckListController::class, 'update'])->name('checklist.update');
+            Route::get('/delete', [CheckListController::class, 'delete'])->name('admin.checklist.delete');
         });
     });
 });
