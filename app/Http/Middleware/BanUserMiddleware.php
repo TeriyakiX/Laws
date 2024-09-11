@@ -21,6 +21,6 @@ class BanUserMiddleware
         {
             return $next($request);
         }
-        return response()->json(['message' => 'Вы заблокированы'], 403);
+        return response()->json(['message' => 'Ваш аккаунт заблокирован'], 403);
     }
 }

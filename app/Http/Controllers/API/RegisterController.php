@@ -12,6 +12,7 @@ use App\Http\Resources\ProfileResource;
 use App\Http\Resources\ProgramResource;
 use App\Http\Resources\UserResource;
 use App\Mail\VerificationMail;
+use App\Models\Ban;
 use App\Models\Confectioner;
 use App\Models\EmailVerification;
 use Carbon\Carbon;
@@ -65,6 +66,11 @@ class RegisterController extends BaseController
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
+            if(!Auth::user()->isBan())
+            {
+                $ban = Ban::where('user_id', $user['id'])->first();
+                return $this->sendError('Unauthorised.', ['error'=>'Ваш аккаунт заблокирован! По причине: ' . $ban['reason'] . '. До ' . $ban['date']]);
+            }
             $user['token'] =  $user->createToken('Law')->plainTextToken;
 
             return $this->sendResponse(UserResource::make($user), 'User login successfully.');
