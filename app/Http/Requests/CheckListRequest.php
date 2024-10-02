@@ -17,7 +17,7 @@ class CheckListRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
-            'date' => ['required', 'date'],
+            'date' => ['nullable', 'date'],
             'for_myself' => ['required', 'boolean'],
         ];
     }
@@ -31,7 +31,6 @@ class CheckListRequest extends FormRequest
                 'min' => 'Минимальное допустимое значение: 3',
             ],
             'date' => [
-                'required' => 'Поле не должно быть пустым',
                 'date' => 'Дата должна быть в формате: гггг-мм-дд',
             ],
             'for_myself' => [
