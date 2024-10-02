@@ -24,7 +24,7 @@ class ProgramRequest extends FormRequest
         return [
             'name' => 'required',
             'total' => 'required',
-            'total_completed' => 'required',
+            'total_completed' => 'nullable',
         ];
     }
 }
