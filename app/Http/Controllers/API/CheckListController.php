@@ -25,8 +25,8 @@ class CheckListController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth()->id();
-        Checklist::create($data);
-        return response()->json(['success' => true, 'date' => 'Задача успешно создана']);
+        $data = Checklist::create($data);
+        return response()->json(['success' => true, 'date' => $data]);
     }
 
     public function finished($id)
@@ -38,6 +38,21 @@ class CheckListController extends Controller
         }
         $checklist['finished'] = 1;
         $checklist->save();
-        return response()->json(['success' => true, 'date' => 'Задача успешно завершена']);
+        return response()->json(['success' => true, 'date' => $checklist]);
+    }
+
+    public function delete($id)
+    {
+        $checklist = Checklist::find($id);
+        if(empty($checklist))
+        {
+            return response()->json(['success' => false, 'error' => 'Такого чек листа не существует']);
+        }
+        if($checklist['user_id'] != Auth()->id())
+        {
+            return response()->json(['success' => false, 'error' => 'Данный чек лист Вам не принадлежит']);
+        }
+        $checklist->delete();
+        return response()->json(['success' => true]);
     }
 }
