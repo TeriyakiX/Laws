@@ -29,14 +29,14 @@ class CheckListController extends Controller
         return response()->json(['success' => true, 'date' => $data]);
     }
 
-    public function finished($id)
+    public function action($id)
     {
         $checklist = Checklist::find($id);
         if($checklist['user_id'] != Auth()->id())
         {
-            return response()->json(['success' => false, 'date' => 'Не удалось завершить задачу']);
+            return response()->json(['success' => false, 'date' => 'Данный чек лист Вам не принадлежит']);
         }
-        $checklist['finished'] = 1;
+        $checklist['finished'] = $checklist['finished'] == 1 ? 0 : 1;
         $checklist->save();
         return response()->json(['success' => true, 'date' => $checklist]);
     }

@@ -84,7 +84,7 @@ Route::prefix('v1')->group(function () {
             // check list
             Route::get('checklist/index', [CheckListController::class, 'index']);
             Route::post('checklist/create', [CheckListController::class, 'create']);
-            Route::get('checklist/finished/{id}', [CheckListController::class, 'finished']);
+            Route::get('checklist/finished/{id}', [CheckListController::class, 'action']);
             Route::get('checklist/delete/{id}', [CheckListController::class, 'delete']);
 
             Route::post('chat/gpt', [GptController::class, 'chat']);
