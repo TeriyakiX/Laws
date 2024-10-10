@@ -15,6 +15,7 @@ use \App\Http\Controllers\Auth\AppleController;
 use \App\Http\Controllers\Auth\ForgotPasswordController;
 use \App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\API\CheckListController;
+use App\Http\Controllers\API\GptChatController;
 
 use App\Notifications\PushNotification;
 
@@ -88,6 +89,7 @@ Route::prefix('v1')->group(function () {
             Route::get('checklist/delete/{id}', [CheckListController::class, 'delete']);
 
             Route::post('chat/gpt', [GptController::class, 'chat']);
+            Route::post('gpt', [GptChatController::class, 'chat']);
         });
         });
 
