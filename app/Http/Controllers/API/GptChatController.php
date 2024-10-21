@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use AppServices\OpenAIService;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;

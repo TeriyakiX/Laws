@@ -15,11 +15,27 @@ class CurrencyResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'country' => $this->country,
-            'currency_name' => $this->currency_name,
-            'currency_symbol' => $this->currency_symbol,
-            'currency' => $this->currency,
+            'ru' => [
+                'id' => $this->id,
+                'country' => $this->country,
+                'currency_name' => $this->currency_name_ru,
+                'currency_symbol' => $this->currency_symbol,
+                'currency' => $this->currency,
+            ],
+            'en' => [
+                'id' => $this->id,
+                'country' => $this->country,
+                'currency_name' => $this->currency_name_en,
+                'currency_symbol' => $this->currency_symbol,
+                'currency' => $this->currency,
+            ],
+            'zh' => [
+                'id' => $this->id,
+                'country' => $this->country,
+                'currency_name' => $this->currency_name_zh,
+                'currency_symbol' => $this->currency_symbol,
+                'currency' => $this->currency,
+            ],
         ];
     }
 }
