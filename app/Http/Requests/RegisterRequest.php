@@ -16,9 +16,9 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'min:2'],
+            'name' => ['required', 'string', 'max:50', 'min:2'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'min:8', 'max:255', 'different:name,email'],
+            'password' => ['required', 'min:8', 'max:255', 'different:name,email', 'regex:/^[a-zA-Z0-9]+$/'],
         ];
     }
 
@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
                 'max' => 'Максимально допустимое значение: 255',
                 'min' => 'Минимальное допустимое значение: 8',
                 'different' => 'Поля имя и почта не должны совпадать с паролем',
+                'regex' => 'Пароль должен состоять только из латиницы и не иметь пробелов',
             ],
         ];
     }
